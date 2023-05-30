@@ -3,7 +3,7 @@ import { Head } from "next/document";
 export default function Home() {
   return (
     <>
-      <section className="main-container">
+      <section className="flex-center">
         <div className="nav-container">
           <div className="nav-container-left">
             <img className="logo" src="/logo.svg" alt="Karade" />
