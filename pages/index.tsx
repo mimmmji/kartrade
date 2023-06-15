@@ -1,6 +1,17 @@
 import CardBox from "@/components/CardBox";
+import { useEffect, useState } from "react";
+import type { Card } from "../pages/api/cards";
 
 export default function Home() {
+  const [cards, setCards] = useState<Card[]>([]);
+
+  useEffect(() => {
+    fetch("/api/cards")
+      .then((response) => response.json())
+      .then((data) => setCards(data.cards))
+      .catch((error) => console.error("Error", error));
+  }, []);
+
   return (
     <>
       <section className="flex-center flex-col main-container w-[375px] border-gray mx-auto">
@@ -24,30 +35,17 @@ export default function Home() {
           />
         </div>
 
-        <CardBox
-          username="koreans1"
-          title="Deco-Sumi Killer of Queen Collection"
-          detail="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis"
-          price="USD 199"
-          imageUrl="https://i1.daumcdn.net/thumb/C600x600/?fname=https://t1.daumcdn.net/cfile/tistory/99230D385F8FF78C1D"
-          logoUrl="https://i1.daumcdn.net/thumb/C600x600/?fname=https://t1.daumcdn.net/cfile/tistory/99230D385F8FF78C1D"
-        />
-        <CardBox
-          username="koreans2"
-          title="2022 Season Greetings"
-          detail="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt"
-          price="USD 199"
-          imageUrl="https://dimg.donga.com/wps/SPORTS/IMAGE/2020/03/10/100088233.1.jpg"
-          logoUrl="https://dimg.donga.com/wps/SPORTS/IMAGE/2020/03/10/100088233.1.jpg"
-        />
-        <CardBox
-          username="koreans3"
-          title="2020 Map Of The Soul:7 Ver3"
-          detail="Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto"
-          price="USD 199"
-          imageUrl="https://i1.daumcdn.net/thumb/C600x600/?fname=https://t1.daumcdn.net/cfile/tistory/992DE04C5FA9052011"
-          logoUrl="https://i1.daumcdn.net/thumb/C600x600/?fname=https://t1.daumcdn.net/cfile/tistory/992DE04C5FA9052011"
-        />
+        {cards.map((card, index) => (
+          <CardBox
+            key={index}
+            username={card.username}
+            title={card.title}
+            detail={card.detail}
+            price={card.price}
+            imageUrl={card.imageUrl}
+            logoUrl={card.logoUrl}
+          />
+        ))}
       </section>
     </>
   );

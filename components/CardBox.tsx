@@ -27,12 +27,16 @@ const CardBox: React.FC<CardBoxProps> = ({
             <div className="ml-2">@{username}</div>
           </div>
         </div>
-        <div className="mx-[25px] my-[10px] text-left">
-          <div className="font-medium text-[20px]">{title}</div>
-          <div className="mt-1 text-[14px] text-[#777777] leading-6">
+        <div className="text-left mx-[25px]">
+          <div className="mt-[27px] font-medium text-[20px] leading-[25px]">
+            {title}
+          </div>
+          <div className="line-clamp-3 mt-[11.25px] text-[14px] text-[#777777] h-[69.25px] leading-[22px]">
             {detail}
           </div>
-          <div className="mt-5 text-[22px] font-normal leading-7">{price}</div>
+          <div className="mt-[8px] mb-[18px] text-[22px] font-normal leading-[34px]">
+            {price}
+          </div>
         </div>
       </div>
       <style jsx>
