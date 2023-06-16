@@ -1,21 +1,15 @@
 import React from "react";
+import {Card} from "@/pages/api/cards";
 
-interface CardBoxProps {
-  username: string;
-  title: string;
-  detail: string;
-  price: string;
-  imageUrl: string;
-  logoUrl: string;
-}
-
-const CardBox: React.FC<CardBoxProps> = ({
-  username,
-  title,
-  detail,
-  price,
-  imageUrl,
-  logoUrl,
+const CardBox: React.FC<{card: Card}> = ({
+    card: {
+      username,
+      title,
+      detail,
+      price,
+      imageUrl,
+      logoUrl,
+    }
 }) => {
   return (
     <>
