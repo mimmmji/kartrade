@@ -7,11 +7,11 @@ export default function Home() {
   const [sortType, setSortType] = useState("default");
 
   useEffect(() => {
-    fetch("/api/cards")
+    fetch(`/api/cards?sortType=${sortType}`)
       .then((response) => response.json())
       .then((data) => setCards(data.cards))
       .catch((error) => console.error("Error", error));
-  }, []);
+  }, [sortType]);
 
   function handleSortChange(e: React.ChangeEvent<HTMLSelectElement>) {
     setSortType(e.target.value);
@@ -42,20 +42,9 @@ export default function Home() {
           />
         </div>
 
-        {cards
-          .sort((card1, card2) => {
-            switch (sortType) {
-              case "price-asc":
-                return card1.price - card2.price;
-              case "price-desc":
-                return card2.price - card1.price;
-              default:
-                return 0;
-            }
-          })
-          .map((card, index) => (
-            <CardBox key={index} card={card} />
-          ))}
+        {cards.map((card, index) => (
+          <CardBox key={index} card={card} />
+        ))}
       </section>
     </>
   );
