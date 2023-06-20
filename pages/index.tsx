@@ -9,6 +9,14 @@ export default function Home() {
   const [sortType, setSortType] = useState("default");
 
   useEffect(() => {
+    const initialSortType =
+      typeof router.query.sortType === "string"
+        ? router.query.sortType
+        : "default";
+    setSortType(initialSortType);
+  }, [router.query]);
+
+  useEffect(() => {
     fetch(`/api/cards?sortType=${sortType}`)
       .then((response) => response.json())
       .then((data) => setCards(data.cards))
@@ -26,13 +34,16 @@ export default function Home() {
       <section className="flex-center flex-col main-container w-[375px] border-gray mx-auto">
         <div className="flex items-center justify-between h-[70px] w-[375px]">
           <img className="ml-6" src="/logo.svg" alt="Karade" />
-          <div className="flex mr-6">
+          <div className="flex mr-6 mr-[25px]">
             <img className="icon" src="/search-icon.svg" alt="search" />
             <img className="icon ml-[25px]" src="/menu-icon.svg" alt="menu" />
           </div>
         </div>
         <div className="w-[375px] h-12 border-gray flex justify-end items-center">
-          <select className="price" onChange={handleSortChange}>
+          <select
+            className="price mr-[25px] text-[13px] text-right"
+            onChange={handleSortChange}
+          >
             <option value="default">Price ($)</option>
             <option value="price-asc">Price: Low-High</option>
             <option value="price-desc">Price: High-Low</option>
