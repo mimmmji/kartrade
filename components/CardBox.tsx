@@ -1,15 +1,8 @@
 import React from "react";
-import {Card} from "@/pages/api/cards";
+import { Card } from "@/pages/api/cards";
 
-const CardBox: React.FC<{card: Card}> = ({
-    card: {
-      username,
-      title,
-      detail,
-      price,
-      imageUrl,
-      logoUrl,
-    }
+const CardBox: React.FC<{ card: Card }> = ({
+  card: { username, title, detail, price, imageUrl, logoUrl },
 }) => {
   return (
     <>
@@ -29,7 +22,7 @@ const CardBox: React.FC<{card: Card}> = ({
             {detail}
           </div>
           <div className="mt-[8px] mb-[18px] text-[22px] font-normal leading-[34px]">
-            {price}
+            USD {price}
           </div>
         </div>
       </div>
