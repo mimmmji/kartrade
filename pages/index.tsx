@@ -1,8 +1,10 @@
 import CardBox from "@/components/CardBox";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import type { Card } from "../pages/api/cards";
 
 export default function Home() {
+  const router = useRouter();
   const [cards, setCards] = useState<Card[]>([]);
   const [sortType, setSortType] = useState("default");
 
@@ -14,7 +16,9 @@ export default function Home() {
   }, [sortType]);
 
   function handleSortChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    setSortType(e.target.value);
+    const selectedSortType = e.target.value;
+    setSortType(selectedSortType);
+    router.push(`/?sortType=${selectedSortType}`);
   }
 
   return (
