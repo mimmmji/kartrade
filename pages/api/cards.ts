@@ -14,7 +14,7 @@ type Data = {
   cards: Card[];
 };
 
-function sortCards(cards: Card[], sortType: string): Card[] {
+function sortCards(cards: Card[], sortType: string | undefined): Card[] {
   switch (sortType) {
     case "price-asc":
       return cards.sort((a, b) => a.price - b.price);
@@ -166,7 +166,7 @@ export default function handler(
     },
   ];
 
-  const sortedCards = sortCards(cards, sortType as string);
+  const sortedCards = sortCards(cards, sortType as string | undefined);
 
   res.status(200).json({ cards: sortedCards });
 }
