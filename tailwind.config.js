@@ -29,6 +29,10 @@ module.exports = {
           height: "17px",
           width: "17px",
         },
+        ".mx-default": {
+          marginRight: "25px",
+          marginLeft: "25px",
+        },
       };
       addUtilities(newUtilities);
     },
