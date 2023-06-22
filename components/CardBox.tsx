@@ -1,16 +1,28 @@
 import React from "react";
 import { Card } from "@/pages/api/cards";
+import { useRouter } from "next/router";
 
 const CardBox: React.FC<{ card: Card }> = ({
-  card: { username, title, detail, price, imageUrl, logoUrl },
+  card: { id, username, title, detail, price, imageUrl, logoUrl },
 }) => {
+  const router = useRouter();
+
+  const handleCardClick = (id: number) => {
+    router.push(`/cards/${id}`);
+  };
+
   return (
     <>
       <div className="flex-col flex-center border-gray h-[640px] w-[375px]">
         <div className="cardbox-container">
-          <img className="w-[325px] h-[325px] mt-[20px]" src={imageUrl} />
+          <img
+            className="w-[325px] h-[325px] mt-[20px]"
+            onClick={() => handleCardClick(id)}
+            src={imageUrl}
+          />
           <div className="cardbox-container-writer flex-center flex-row h-[70px] w-[325px]">
             <img className="rounded-full h-10 w-10" src={logoUrl} />
+
             <div className="ml-2">@{username}</div>
           </div>
         </div>
