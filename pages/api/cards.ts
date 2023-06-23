@@ -1,20 +1,7 @@
+import { Card, Data } from "@/types/types";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export type Card = {
-  username: string;
-  title: string;
-  detail: string;
-  price: number;
-  imageUrl: string;
-  logoUrl: string;
-  createdAt: string;
-  id: number;
-};
-
-type Data = {
-  cards: Card[];
-};
-const cards: Card[] = [
+export const cards: Card[] = [
   {
     id: 1,
     username: "koreans1",

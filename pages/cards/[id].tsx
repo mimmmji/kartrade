@@ -1,28 +1,7 @@
 import Header from "@/components/Header";
+import { DetailProps } from "@/types/types";
 import { GetServerSideProps } from "next";
 import { useState } from "react";
-import { Card } from "../api/cards/[id]";
-
-type DetailProps = {
-  card: Card;
-};
-
-const fetchCard = async (id: number) => {
-  const res = await fetch(`http://localhost:3000/api/cards/${id}`);
-  const data = await res.json();
-  return data;
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = context.params?.id as string;
-  const cardData = await fetchCard(Number(id));
-
-  return {
-    props: {
-      card: cardData.cards[0],
-    },
-  };
-};
 
 export default function Detail({ card }: DetailProps) {
   const [quantity, setQuantity] = useState(1);
@@ -112,3 +91,11 @@ export default function Detail({ card }: DetailProps) {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const id = context.params?.id;
+  const res = await fetch(`http://localhost:3000/api/cards/${id}`);
+  const cardData = await res.json();
+
+  return { props: { card: cardData.cards[0] } };
+};
