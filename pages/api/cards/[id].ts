@@ -14,6 +14,7 @@ export type Card = {
 type Data = {
   cards: Card[];
 };
+
 const cards: Card[] = [
   {
     id: 1,
@@ -175,9 +176,10 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { sortType } = req.query;
+  const { id } = req.query;
+  const filterCards = cards.filter(
+    (card) => card.id === parseInt(id as string)
+  );
 
-  const sortedCards = sortCards(cards, sortType as string | undefined);
-
-  res.status(200).json({ cards: sortedCards });
+  res.status(200).json({ cards: filterCards });
 }
