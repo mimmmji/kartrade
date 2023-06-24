@@ -47,6 +47,9 @@ module.exports = {
         ".bottom-gray": {
           borderBottom: "1px solid #d8d8d8",
         },
+        ".top-gray": {
+          borderTop: "1px solid #d8d8d8",
+        },
         ".border-gray-2": {
           borderBottom: "1px solid #d8d8d8",
           borderTop: "1px solid #d8d8d8",
@@ -70,6 +73,16 @@ module.exports = {
           height: "55px",
           border: "1px solid #777777",
           borderRadius: "74px",
+        },
+        ".font1": {
+          fontSize: "16px",
+          fontWeight: "500",
+          lineHeight: "34px",
+        },
+        ".font2": {
+          fontSize: "16px",
+          lineHeight: "28px",
+          color: "#777777",
         },
       };
       addUtilities(newUtilities);

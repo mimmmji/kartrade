@@ -1,6 +1,7 @@
 import React from "react";
-import { Card } from "@/pages/api/cards";
+
 import { useRouter } from "next/router";
+import { Card } from "@/types/types";
 
 const CardBox: React.FC<{ card: Card }> = ({
   card: { id, username, title, detail, price, imageUrl, logoUrl },

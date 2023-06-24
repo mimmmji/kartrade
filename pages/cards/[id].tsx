@@ -1,6 +1,9 @@
+import DetailCardBox from "@/components/DetailCardBox";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { DetailProps } from "@/types/types";
 import { GetServerSideProps } from "next";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Detail({ card }: DetailProps) {
@@ -18,7 +21,9 @@ export default function Detail({ card }: DetailProps) {
       <section className="section">
         <Header />
         <div className="w-[375px] h-12 border-gray flex items-center">
-          <span className="gray text-[13px] ml-[25px]">Home {">"}</span>
+          <Link href="/">
+            <span className="gray text-[13px] ml-[25px]">Home {">"}</span>
+          </Link>
           <span className="text-[13px] ml-[5px]">Card Detail</span>
         </div>
 
@@ -33,7 +38,7 @@ export default function Detail({ card }: DetailProps) {
             <div className="text-[12px] ml-[3px]">Send Message</div>
           </div>
         </div>
-        <div className="mx-default my-[28.5px]">
+        <div className="mx-default py-[28.5px]  bottom-gray">
           <div className="font-medium text-[28px] mb-[28px]">{card.title}</div>
           <div className="text-[16px]  mb-[28px] gray">{card.detail}</div>
           <div className="font-medium text-[28px] mb-[2px]">
@@ -43,43 +48,54 @@ export default function Detail({ card }: DetailProps) {
             Local Taxes included (where applicable)
           </div>
         </div>
-        <div className="flex-center w-[322px] h-[375px] border-gray-2 mx-default">
-          <img className="w-[322px] h-[322px]" src={card.imageUrl} />
+
+        <DetailCardBox card={card} />
+
+        <div className="flex flex-row items-center h-[115px] bottom-gray mx-default">
+          <div className="font1 mr-[32px]">Quantity</div>
+          <img
+            className="w-[38px] h-[38px] mr-[20px]"
+            onClick={decreaseQuantity}
+            src="/minus.svg"
+          />
+          <div className="mr-[20px]">{quantity}</div>
+          <img
+            className="w-[38px] h-[38px]"
+            src="/plus.svg"
+            onClick={increaseQuantity}
+          />
         </div>
-        <div className="flex-center w-[322px] h-[375px] border-gray-2 mx-default">
-          <img className="w-[322px] h-[322px]" src={card.imageUrl} />
-        </div>
-        <div className="flex-center w-[322px] h-[375px] border-gray-2 mx-default">
-          <img className="w-[322px] h-[322px]" src={card.imageUrl} />
-        </div>
-        <div className="w-[325px] h-[212px] border-gray-2 mx-default">
-          <div className="flex flex-row items-center mt-[42px]">
-            <div className="font-medium text-[16px] mr-[32px]">Quantity</div>
-            <img
-              className="w-[38px] h-[38px] mr-[20px]"
-              onClick={decreaseQuantity}
-              src="/minus.svg"
-            />
-            <div className="mr-[20px]">{quantity}</div>
-            <img
-              className="w-[38px] h-[38px]"
-              src="/plus.svg"
-              onClick={increaseQuantity}
-            />
-          </div>
-          <div className="flex flex-row my-[40px]">
-            <div className="black-button mr-[20px] flex flex-row">
-              <div className="font-medium text-[13px] flex-center mx-auto">
-                SEND MESSAGE
-              </div>
-            </div>
-            <div className="white-button flex flex-row">
-              <div className="font-medium text-[13px] flex-center mx-auto">
-                WISH LIST
-              </div>
-            </div>
+
+        <div className="mx-default">
+          <div className="font1 mt-[30px] mb-[15px]">Specifit Details</div>
+          <div className="font2 mb-[22px]">
+            Contains:
+            <br />
+            6 Postcard
+            <br />
+            2 Random Photocards
+            <br />
+            1 double sided bookmark
+            <br />
+            Double Coated / Waterproof cards
           </div>
         </div>
+        <div className="border-gray-2 mx-default">
+          <div className="font1 mt-[30px] mb-[15px]">Shipping & Returns</div>
+          <div className="font2 mb-[107px]">
+            Shipping: Free home delivery worldwide
+            <br />
+            Delivery: 2-5 days delivery
+            <br />
+            Returns: Free 30-day return policy
+            <br />
+            Warranty: Lifetime warranty
+            <br />
+            Tax & Import: Tax and import duties included
+            <br />
+          </div>
+        </div>
+        <Footer />
       </section>
       <style jsx>
         {`

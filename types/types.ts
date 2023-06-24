@@ -7,6 +7,7 @@ export type Card = {
   logoUrl: string;
   createdAt: string;
   id: number;
+  detailImageUrl: string[];
 };
 
 export type Data = {
