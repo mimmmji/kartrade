@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { cards } from "../cards";
+import cards from "@/data/cards";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
