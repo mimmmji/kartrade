@@ -113,5 +113,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const res = await fetch(`http://localhost:3000/api/cards/${id}`);
   const cardData = await res.json();
 
-  return { props: { card: cardData.cards[0] } };
+  return { props: { card: cardData.card } };
 };
