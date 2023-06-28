@@ -51,7 +51,7 @@ export default function Detail({ card }: DetailProps) {
 
         <DetailCardBox card={card} />
 
-        <div className="flex flex-row items-center h-[115px] bottom-gray mx-default">
+        <div className="flex flex-row items-center mt-[40px] mb-[25px] mx-default w-full">
           <div className="font1 mr-[32px]">Quantity</div>
           <img
             className="w-[38px] h-[38px] mr-[20px]"
@@ -65,8 +65,8 @@ export default function Detail({ card }: DetailProps) {
             onClick={increaseQuantity}
           />
         </div>
-
-        <div className="mx-default">
+        <Footer />
+        <div className="mx-default top-gray mt-[35px]">
           <div className="font1 mt-[30px] mb-[15px]">Specifit Details</div>
           <div className="font2 mb-[22px]">
             Contains:
@@ -82,7 +82,7 @@ export default function Detail({ card }: DetailProps) {
         </div>
         <div className="border-gray-2 mx-default">
           <div className="font1 mt-[30px] mb-[15px]">Shipping & Returns</div>
-          <div className="font2 mb-[107px]">
+          <div className="font2 mb-[40px]">
             Shipping: Free home delivery worldwide
             <br />
             Delivery: 2-5 days delivery
@@ -95,7 +95,6 @@ export default function Detail({ card }: DetailProps) {
             <br />
           </div>
         </div>
-        <Footer />
       </section>
       <style jsx>
         {`

@@ -1,7 +1,33 @@
+import { useEffect, useRef } from "react";
+
 export default function Footer() {
+  const footerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!footerRef.current) return;
+      const initialCoords = footerRef.current.getBoundingClientRect();
+
+      if (window.scrollY < initialCoords.top) {
+        footerRef.current.classList.add("sticky");
+      } else {
+        footerRef.current.classList.remove("sticky");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <div className="flex-center flex-row footer-container h-[85px]">
+      <div
+        className="flex-center flex-row footer-container h-[85px] "
+        ref={footerRef}
+      >
         <div className="black-button mr-[20px] flex-center flex-row">
           <img
             className="w-[14px] h-[14px] mr-[4px]"
@@ -16,15 +42,14 @@ export default function Footer() {
       </div>
       <style jsx>{`
         .footer-container {
-          box-shadow: 0px 4px 20px 0px #00000033;
-          position: fixed;
+          position: -webkit-sticky;
+          position: sticky;
           bottom: 0;
-          left: 0;
-          right: 0;
-          margin-left: auto;
-          margin-right: auto;
-          width: 375px;
           background-color: white;
+        }
+
+        .sticky {
+          box-shadow: 0px 4px 20px 0px #00000033;
         }
       `}</style>
     </>
