@@ -28,6 +28,12 @@ module.exports = {
         ".gray": {
           color: "#777777",
         },
+        ".gray2": {
+          color: "#646464",
+        },
+        ".black": {
+          color: "black",
+        },
         ".icon": {
           height: "18px",
           width: "18px",
@@ -40,12 +46,15 @@ module.exports = {
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
-          width: "375px",
+          maxWidth: "375px",
           margin: "0 auto",
           border: "1px solid gray",
         },
         ".bottom-gray": {
           borderBottom: "1px solid #d8d8d8",
+        },
+        ".bottom-gray2": {
+          borderBottom: "1px solid #A8A8A8",
         },
         ".top-gray": {
           borderTop: "1px solid #d8d8d8",
@@ -83,6 +92,10 @@ module.exports = {
           fontSize: "16px",
           lineHeight: "28px",
           color: "#777777",
+        },
+        ".font3": {
+          fontSize: "16px",
+          lineHeight: "16px",
         },
       };
       addUtilities(newUtilities);

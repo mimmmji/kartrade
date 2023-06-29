@@ -17,3 +17,17 @@ export type Data = {
 export type DetailProps = {
   card: Card;
 };
+
+export type SearchProps = {
+  keyword: string;
+  filteredCards: Card[];
+};
+
+export type SortSelectProps = {
+  sortType: string;
+  onSortChange: (value: string) => void;
+};
+
+export type SearchNavProps = {
+  onEnterKeyPress: () => void;
+};

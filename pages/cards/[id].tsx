@@ -20,7 +20,7 @@ export default function Detail({ card }: DetailProps) {
     <>
       <section className="section">
         <Header />
-        <div className="w-[375px] h-12 border-gray flex items-center">
+        <div className="w-[375px] h-12 bottom-gray flex items-center">
           <Link href="/">
             <span className="gray text-[13px] ml-[25px]">Home {">"}</span>
           </Link>

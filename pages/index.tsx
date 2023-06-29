@@ -31,7 +31,7 @@ export default function Home() {
     <>
       <section className="section">
         <Header />
-        <div className="w-[375px] h-12 border-gray flex justify-end items-center">
+        <div className="w-[375px] h-12 bottom-gray flex justify-end items-center">
           <select
             className="price mx-default text-[13px] text-right"
             onChange={handleSortChange}
