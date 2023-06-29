@@ -1,24 +1,39 @@
 import { SearchNavProps } from "@/types/types";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SearchNav({ onEnterKeyPress }: SearchNavProps) {
   const [keyword, setKeyword] = useState("");
+  const [keywords, setKeywords] = useState<{ text: string }[]>([]);
   const router = useRouter();
+
+  useEffect(() => {
+    setKeywords(JSON.parse(localStorage.getItem("keywords") || "[]"));
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
   };
 
-  const handleSearchKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      if (onEnterKeyPress) {
-        onEnterKeyPress();
-      }
-      router.push(`/search?keyword=${keyword}`);
-    }
+  const handleSearch = (keyword: string) => {
+    onEnterKeyPress();
+    const newKeyword = [{ text: keyword }, ...keywords];
+    setKeywords(newKeyword);
+    localStorage.setItem("keywords", JSON.stringify(newKeyword));
+    router.push(`/search?keyword=${keyword}`);
   };
+
+  const handleDeleteKeyword = (index: number) => {
+    const newKeyword = keywords.filter((_, idx) => idx !== index);
+    setKeywords(newKeyword);
+    localStorage.setItem("keywords", JSON.stringify(newKeyword));
+  };
+
+  const handleDeleteAll = () => {
+    setKeywords([]);
+    localStorage.setItem("keywords", JSON.stringify([]));
+  };
+
   return (
     <>
       <div className="bg-white w-[373px] search-nav">
@@ -33,14 +48,36 @@ export default function SearchNav({ onEnterKeyPress }: SearchNavProps) {
             placeholder="Search by title"
             value={keyword}
             onChange={handleInputChange}
-            onKeyPress={handleSearchKeyPress}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleSearch(keyword);
+              }
+            }}
           />
         </div>
         <div className="mt-[40px] mx-default flex justify-between">
-          <span className="font-[14px] font-medium">History</span>
-          <span className="gray2 font-[13px]">Delete All</span>
+          <span className="text-[14px] font-medium">History</span>
+          <button className="gray2 text-[13px]" onClick={handleDeleteAll}>
+            Delete All
+          </button>
         </div>
-        <div className="min-h-[170px]"></div>
+        <div className="h-[168px] mx-default mt-[20px] gray2 text-[14px] overflow-y-hidden">
+          {keywords.length ? (
+            keywords.map((keyword, index) => (
+              <div key={index} className="flex justify-between mb-[20px]">
+                <span onClick={() => handleSearch(keyword.text)}>
+                  {keyword.text}
+                </span>
+                <button onClick={() => handleDeleteKeyword(index)}>X</button>
+              </div>
+            ))
+          ) : (
+            <div className="gray3 text-[14px] h-full w-full flex-center pb-[30px]">
+              No history
+            </div>
+          )}
+        </div>
       </div>
 
       <style jsx>

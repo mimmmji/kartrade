@@ -8,9 +8,6 @@ export default function Header() {
     setIsSearchNavVisible(!isSearchNavVisible);
   };
 
-  const handleEnterKeyPress = () => {
-    setIsSearchNavVisible(false);
-  };
   return (
     <>
       <div className="flex items-center justify-between h-[70px] w-[375px] bottom-gray">
@@ -29,7 +26,7 @@ export default function Header() {
       </div>
       {isSearchNavVisible && (
         <div className="absolute top-[71px] z-10 flex-center">
-          <SearchNav onEnterKeyPress={handleEnterKeyPress} />
+          <SearchNav onEnterKeyPress={toggleSearchNav} />
         </div>
       )}
 

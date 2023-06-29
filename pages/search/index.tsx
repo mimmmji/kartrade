@@ -27,7 +27,7 @@ export default function Search({ keyword, filteredCards }: SearchProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  let keyword = context.query.keyword;
+  let keyword = context.query.keyword || null;
   const res = await fetch(`http://localhost:3000/api/search/${keyword}`);
   const cardData = await res.json();
 
