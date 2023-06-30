@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function SearchNav({ onEnterKeyPress }: SearchNavProps) {
   const [keyword, setKeyword] = useState("");
-  const [keywords, setKeywords] = useState<{ text: string }[]>([]);
+  const [keywords, setKeywords] = useState<string[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function SearchNav({ onEnterKeyPress }: SearchNavProps) {
 
   const handleSearch = (keyword: string) => {
     onEnterKeyPress();
-    const newKeyword = [{ text: keyword }, ...keywords];
+    const newKeyword = [keyword, ...keywords];
     setKeywords(newKeyword);
     localStorage.setItem("keywords", JSON.stringify(newKeyword));
     router.push(`/search?keyword=${keyword}`);
@@ -66,9 +66,7 @@ export default function SearchNav({ onEnterKeyPress }: SearchNavProps) {
           {keywords.length ? (
             keywords.map((keyword, index) => (
               <div key={index} className="flex justify-between mb-[20px]">
-                <span onClick={() => handleSearch(keyword.text)}>
-                  {keyword.text}
-                </span>
+                <span onClick={() => handleSearch(keyword)}>{keyword}</span>
                 <button onClick={() => handleDeleteKeyword(index)}>X</button>
               </div>
             ))
@@ -79,14 +77,6 @@ export default function SearchNav({ onEnterKeyPress }: SearchNavProps) {
           )}
         </div>
       </div>
-
-      <style jsx>
-        {`
-          .search-nav {
-            box-shadow: 0px 6px 20px 0px #0000001a;
-          }
-        `}
-      </style>
     </>
   );
 }

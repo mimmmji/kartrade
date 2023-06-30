@@ -21,9 +21,8 @@ const CardBox: React.FC<{ card: Card }> = ({
             onClick={() => handleCardClick(id)}
             src={imageUrl}
           />
-          <div className="cardbox-container-writer flex-center flex-row h-[70px] w-[325px]">
+          <div className="cardbox-container-writer flex flex-row h-[70px] w-[325px] bottom-gray justify-start items-center">
             <img className="rounded-full h-10 w-10" src={logoUrl} />
-
             <div className="ml-2">@{username}</div>
           </div>
         </div>
@@ -39,14 +38,6 @@ const CardBox: React.FC<{ card: Card }> = ({
           </div>
         </div>
       </div>
-      <style jsx>
-        {`
-          .cardbox-container-writer {
-            justify-content: flex-start;
-            border-bottom: 1px solid #d8d8d8;
-          }
-        `}
-      </style>
     </>
   );
 };

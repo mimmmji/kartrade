@@ -29,8 +29,6 @@ export default function Header() {
           <SearchNav onEnterKeyPress={toggleSearchNav} />
         </div>
       )}
-
-      <style jsx>{``}</style>
     </>
   );
 }
