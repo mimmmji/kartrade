@@ -34,6 +34,9 @@ module.exports = {
         ".gray3": {
           color: "#B7B7B7",
         },
+        ".gray4": {
+          backgroundColor: "#D8D8D8",
+        },
         ".black": {
           color: "black",
         },
@@ -85,6 +88,19 @@ module.exports = {
           height: "55px",
           border: "1px solid #777777",
           borderRadius: "74px",
+        },
+        ".white-button2": {
+          width: "325px",
+          height: "55px",
+          border: "1px solid #000000",
+          borderRadius: "74px",
+        },
+        ".black-button2": {
+          width: "325px",
+          height: "55px",
+          background: "#1B1B1B",
+          borderRadius: "74px",
+          color: "white",
         },
         ".font1": {
           fontSize: "16px",

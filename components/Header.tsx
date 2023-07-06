@@ -14,14 +14,17 @@ export default function Header() {
         <Link href="/">
           <img className="mx-default" src="/logo.svg" alt="Karade" />
         </Link>
-        <div className="flex">
+        <div className="flex w-[25%] justify-between mr-[25px]">
+          <Link href="/login">
+            <img className="w-[30px] h-[30px]" src="/login.png" alt="login" />
+          </Link>
           <img
-            className="icon"
+            className="icon mt-[5px]"
             src="/search-icon.svg"
             alt="search"
             onClick={toggleSearchNav}
           />
-          <img className="icon mx-default" src="/menu-icon.svg" alt="menu" />
+          <img className="icon mt-[5px]" src="/menu-icon.svg" alt="menu" />
         </div>
       </div>
       {isSearchNavVisible && (
