@@ -20,7 +20,7 @@ export default function Detail({ card }: DetailProps) {
     <>
       <section className="section">
         <Header />
-        <div className="w-[375px] h-12 border-gray flex items-center">
+        <div className="w-[375px] h-12 bottom-gray flex items-center">
           <Link href="/">
             <span className="gray text-[13px] ml-[25px]">Home {">"}</span>
           </Link>
@@ -96,13 +96,6 @@ export default function Detail({ card }: DetailProps) {
           </div>
         </div>
       </section>
-      <style jsx>
-        {`
-          .cardbox-container-writer {
-            border-bottom: 1px solid #d8d8d8;
-          }
-        `}
-      </style>
     </>
   );
 }
