@@ -1,7 +1,8 @@
 import CardBox from "@/components/CardBox";
+import Header from "@/components/Header";
+import { Card } from "@/types/types";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import type { Card } from "../pages/api/cards";
 
 export default function Home() {
   const router = useRouter();
@@ -28,14 +29,8 @@ export default function Home() {
 
   return (
     <>
-      <section className="flex-center flex-col main-container w-[375px] border-gray mx-auto">
-        <div className="flex items-center justify-between h-[70px] w-[375px]">
-          <img className="mx-default" src="/logo.svg" alt="Karade" />
-          <div className="flex">
-            <img className="icon" src="/search-icon.svg" alt="search" />
-            <img className="icon mx-default" src="/menu-icon.svg" alt="menu" />
-          </div>
-        </div>
+      <section className="section">
+        <Header />
         <div className="w-[375px] h-12 border-gray flex justify-end items-center">
           <select
             className="price mx-default text-[13px] text-right"
@@ -55,8 +50,8 @@ export default function Home() {
           />
         </div>
 
-        {cards.map((card, index) => (
-          <CardBox key={index} card={card} />
+        {cards.map((card) => (
+          <CardBox key={card.id} card={card} />
         ))}
       </section>
     </>
