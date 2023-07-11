@@ -1,15 +1,9 @@
 import Header from "@/components/Header";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { auth } from "../service/firebase";
 import { useRouter } from "next/router";
 import { User as NextAuthUser } from "next-auth";
-import {
-  FacebookAuthProvider,
-  GoogleAuthProvider,
-  TwitterAuthProvider,
-} from "firebase/auth";
 import SocialLoginButton from "@/components/SocialLoginButton";
-import { useSession } from "next-auth/react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -30,16 +24,6 @@ export default function Login() {
 
   const handleSignUp = () => {
     router.push("/signup");
-  };
-
-  const handleSocialLoginSuccess = (user: NextAuthUser) => {
-    setUserData(user);
-    alert("로그인 성공");
-    router.push("/");
-  };
-
-  const handleSocialLoginFailure = () => {
-    alert("로그인 실패");
   };
 
   return (
@@ -74,22 +58,16 @@ export default function Login() {
         </div>
         <div className="mx-auto h-[230px] flex flex-col justify-around">
           <SocialLoginButton
-            provider={new GoogleAuthProvider()}
+            provider={'google'}
             buttonText="Continue with Google"
-            onSuccess={handleSocialLoginSuccess}
-            onFailure={handleSocialLoginFailure}
           />
           <SocialLoginButton
-            provider={new TwitterAuthProvider()}
+            provider={'twitter'}
             buttonText="Continue with Twitter"
-            onSuccess={handleSocialLoginSuccess}
-            onFailure={handleSocialLoginFailure}
           />
           <SocialLoginButton
-            provider={new FacebookAuthProvider()}
+            provider={'facebook'}
             buttonText="Continue with Facebook"
-            onSuccess={handleSocialLoginSuccess}
-            onFailure={handleSocialLoginFailure}
           />
         </div>
         <p className="mx-default my-[25px] gray">

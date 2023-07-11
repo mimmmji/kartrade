@@ -2,6 +2,7 @@ import { auth } from "@/service/firebase";
 import { AuthProvider, signInWithPopup } from "firebase/auth";
 import { User as FirebaseAuthUser } from "firebase/auth";
 import { User as NextAuthUser } from "next-auth";
+import {useRouter} from "next/router";
 
 const convertFirebaseUserToNextAuthUser = (
   firebaseUser: FirebaseAuthUser
@@ -18,22 +19,44 @@ const convertFirebaseUserToNextAuthUser = (
 interface SocialLoginButtonProps {
   provider: AuthProvider;
   buttonText: string;
-  onSuccess: (user: NextAuthUser) => void;
-  onFailure: () => void;
 }
 
 const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({
   provider,
   buttonText,
-  onSuccess,
-  onFailure,
 }) => {
+  const router = useRouter();
+  const onSuccess = () => {
+    alert("로그인 성공");
+    router.push("/");
+  };
+  const onFailure = () => {
+    alert("로그인 실패");
+  };
+
+
+  let authProvider: AuthProvider;
+  switch (provider) {
+    case "facebook": {
+      authProvider = new FacebookAuthProvider();
+      break;
+    }
+    case "twitter":{
+      authProvider=new TwitterAuthProvider();
+      break;
+    }
+    case "google":{
+      authProvider=new GoogleAuthProvider();
+      break;
+    }
+    default:
+      throw new Error("Provider not supported");
+  }
+
   const handleSignIn = () => {
-    signInWithPopup(auth, provider)
+    signInWithPopup(auth, authProvider)
       .then((result) => {
-        const firebaseUser = result.user;
-        const nextAuthUser = convertFirebaseUserToNextAuthUser(firebaseUser); // Firebase 사용자 객체를 Next.js 사용자 객체로 변환합니다.
-        onSuccess(nextAuthUser);
+        onSuccess();
       })
       .catch(() => {
         onFailure();
