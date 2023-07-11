@@ -1,5 +1,11 @@
 import { auth } from "@/service/firebase";
-import { AuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  AuthProvider,
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  signInWithPopup,
+  TwitterAuthProvider
+} from "firebase/auth";
 import { User as FirebaseAuthUser } from "firebase/auth";
 import { User as NextAuthUser } from "next-auth";
 import {useRouter} from "next/router";
@@ -17,7 +23,7 @@ const convertFirebaseUserToNextAuthUser = (
 };
 
 interface SocialLoginButtonProps {
-  provider: AuthProvider;
+  provider: "google" | "facebook" | "twitter";
   buttonText: string;
 }
 
