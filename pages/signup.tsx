@@ -1,20 +1,11 @@
-import { useState } from "react";
 import firebase from "../service/firebase";
 import { useRouter } from "next/router";
 import Header from "@/components/Header";
-import { User as NextAuthUser } from "next-auth";
-import {
-  FacebookAuthProvider,
-  GoogleAuthProvider,
-  TwitterAuthProvider,
-} from "firebase/auth";
 import SocialLoginButton from "@/components/SocialLoginButton";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 export default function SignUp() {
-  const [userData, setUserData] = useState<NextAuthUser | null>(null);
-
   const router = useRouter();
 
   const createUser = (email: string, password: string) => {
@@ -36,16 +27,6 @@ export default function SignUp() {
       .required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
-
-  const handleSocialLoginSuccess = (user: NextAuthUser) => {
-    setUserData(user);
-    alert("가입 성공");
-    router.push("/");
-  };
-
-  const handleSocialLoginFailure = () => {
-    alert("가입 실패");
-  };
 
   return (
     <>
@@ -89,7 +70,7 @@ export default function SignUp() {
             </div>
 
             <button className="black-button2 flex-center mx-auto" type="submit">
-              회원가입
+              SIGN UP
             </button>
           </Form>
         </Formik>
@@ -104,22 +85,16 @@ export default function SignUp() {
         </div>
         <div className="mx-auto h-[230px] flex flex-col justify-around">
           <SocialLoginButton
-            provider={new GoogleAuthProvider()}
+            provider={"google"}
             buttonText="Continue with Google"
-            onSuccess={handleSocialLoginSuccess}
-            onFailure={handleSocialLoginFailure}
           />
           <SocialLoginButton
-            provider={new TwitterAuthProvider()}
+            provider={"twitter"}
             buttonText="Continue with Twitter"
-            onSuccess={handleSocialLoginSuccess}
-            onFailure={handleSocialLoginFailure}
           />
           <SocialLoginButton
-            provider={new FacebookAuthProvider()}
+            provider={"facebook"}
             buttonText="Continue with Facebook"
-            onSuccess={handleSocialLoginSuccess}
-            onFailure={handleSocialLoginFailure}
           />
         </div>
         <p className="mx-default my-[25px] gray">
