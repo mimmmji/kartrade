@@ -1,3 +1,4 @@
+import { useAuthStatus } from "@/hooks/useAuthStatus";
 import Link from "next/link";
 import { useState } from "react";
 import SearchNav from "./SearchNav";
@@ -8,20 +9,41 @@ export default function Header() {
     setIsSearchNavVisible(!isSearchNavVisible);
   };
 
+  const { init, isLoggedIn } = useAuthStatus();
+
   return (
     <>
       <div className="flex items-center justify-between h-[70px] w-[375px] bottom-gray">
         <Link href="/">
           <img className="mx-default" src="/logo.svg" alt="Karade" />
         </Link>
-        <div className="flex">
+        <div className="flex w-[25%] justify-between mr-[25px]">
+          {init &&
+            (isLoggedIn ? (
+              <Link href="/profile">
+                <img
+                  className="w-[30px] h-[30px]"
+                  src="/login.png"
+                  alt="login"
+                />
+              </Link>
+            ) : (
+              <Link href="/login">
+                <img
+                  className="w-[30px] h-[30px]"
+                  src="/login.png"
+                  alt="login"
+                />
+              </Link>
+            ))}
+
           <img
-            className="icon"
+            className="icon mt-[5px]"
             src="/search-icon.svg"
             alt="search"
             onClick={toggleSearchNav}
           />
-          <img className="icon mx-default" src="/menu-icon.svg" alt="menu" />
+          <img className="icon mt-[5px]" src="/menu-icon.svg" alt="menu" />
         </div>
       </div>
       {isSearchNavVisible && (
