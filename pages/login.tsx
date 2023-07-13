@@ -1,16 +1,18 @@
 import Header from "@/components/Header";
-import { auth } from "../service/firebase";
 import { useRouter } from "next/router";
 import SocialLoginButton from "@/components/SocialLoginButton";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { authService } from "@/service/firebase";
+import { validationSchema } from "@/service/validationSchema";
 
 export default function Login() {
   const router = useRouter();
 
   const handleLogin = async (email: string, password: string) => {
     try {
-      await auth.signInWithEmailAndPassword(email, password);
+      await signInWithEmailAndPassword(authService, email, password);
       alert("로그인 성공");
       router.push("/");
     } catch (error) {
@@ -22,13 +24,6 @@ export default function Login() {
     router.push("/signup");
   };
 
-  const signInSchema = Yup.object({
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
-    password: Yup.string().required("Password is required"),
-  });
-
   return (
     <>
       <section className="section">
@@ -36,7 +31,7 @@ export default function Login() {
         <p className="text-[32px] font-medium mx-default my-[50px]">Sign In</p>
         <Formik
           initialValues={{ email: "", password: "" }}
-          validationSchema={signInSchema}
+          validationSchema={validationSchema}
           onSubmit={(values) => {
             handleLogin(values.email, values.password);
           }}

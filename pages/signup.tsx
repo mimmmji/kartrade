@@ -1,32 +1,25 @@
-import firebase from "../service/firebase";
+import firebase, { authService } from "../service/firebase";
 import { useRouter } from "next/router";
 import Header from "@/components/Header";
 import SocialLoginButton from "@/components/SocialLoginButton";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { validationSchema } from "@/service/validationSchema";
 
 export default function SignUp() {
   const router = useRouter();
 
-  const createUser = (email: string, password: string) => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        alert("가입 성공");
-        router.push("/");
-      })
-      .catch(() => {
-        alert("가입 실패");
-      });
+  const createUser = async (email: string, password: string) => {
+    try {
+      await createUserWithEmailAndPassword(authService, email, password);
+      alert("가입 성공");
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+      alert("가입 실패");
+    }
   };
-
-  const SignUpSchema = Yup.object({
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
-    password: Yup.string().required("Password is required"),
-  });
 
   return (
     <>
@@ -35,7 +28,7 @@ export default function SignUp() {
         <p className="text-[32px] font-medium mx-default my-[50px]">Sign Up</p>
         <Formik
           initialValues={{ email: "", password: "" }}
-          validationSchema={SignUpSchema}
+          validationSchema={validationSchema}
           onSubmit={(values) => {
             createUser(values.email, values.password);
           }}

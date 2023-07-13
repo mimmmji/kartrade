@@ -1,26 +1,12 @@
-import { auth } from "@/service/firebase";
+import { authService } from "@/service/firebase";
 import {
   AuthProvider,
   FacebookAuthProvider,
   GoogleAuthProvider,
   signInWithPopup,
-  TwitterAuthProvider
+  TwitterAuthProvider,
 } from "firebase/auth";
-import { User as FirebaseAuthUser } from "firebase/auth";
-import { User as NextAuthUser } from "next-auth";
-import {useRouter} from "next/router";
-
-const convertFirebaseUserToNextAuthUser = (
-  firebaseUser: FirebaseAuthUser
-): NextAuthUser => {
-  const nextAuthUser: NextAuthUser = {
-    id: firebaseUser.uid,
-    name: firebaseUser.displayName || "",
-    email: firebaseUser.email || "",
-  };
-
-  return nextAuthUser;
-};
+import { useRouter } from "next/router";
 
 interface SocialLoginButtonProps {
   provider: "google" | "facebook" | "twitter";
@@ -40,19 +26,18 @@ const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({
     alert("로그인 실패");
   };
 
-
   let authProvider: AuthProvider;
   switch (provider) {
     case "facebook": {
       authProvider = new FacebookAuthProvider();
       break;
     }
-    case "twitter":{
-      authProvider=new TwitterAuthProvider();
+    case "twitter": {
+      authProvider = new TwitterAuthProvider();
       break;
     }
-    case "google":{
-      authProvider=new GoogleAuthProvider();
+    case "google": {
+      authProvider = new GoogleAuthProvider();
       break;
     }
     default:
@@ -60,8 +45,8 @@ const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({
   }
 
   const handleSignIn = () => {
-    signInWithPopup(auth, authProvider)
-      .then((result) => {
+    signInWithPopup(authService, authProvider)
+      .then(() => {
         onSuccess();
       })
       .catch(() => {

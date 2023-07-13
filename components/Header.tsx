@@ -1,14 +1,15 @@
-import { useSession } from "next-auth/react";
+import { useAuthStatus } from "@/hooks/useAuthStatus";
 import Link from "next/link";
 import { useState } from "react";
 import SearchNav from "./SearchNav";
 
 export default function Header() {
   const [isSearchNavVisible, setIsSearchNavVisible] = useState(false);
-  const { data: session } = useSession();
   const toggleSearchNav = () => {
     setIsSearchNavVisible(!isSearchNavVisible);
   };
+
+  const { init, isLoggedIn } = useAuthStatus();
 
   return (
     <>
@@ -17,15 +18,25 @@ export default function Header() {
           <img className="mx-default" src="/logo.svg" alt="Karade" />
         </Link>
         <div className="flex w-[25%] justify-between mr-[25px]">
-          {session ? (
-            <Link href="/profile">
-              <img className="w-[30px] h-[30px]" src="/login.png" alt="login" />
-            </Link>
-          ) : (
-            <Link href="/login">
-              <img className="w-[30px] h-[30px]" src="/login.png" alt="login" />
-            </Link>
-          )}
+          {init &&
+            (isLoggedIn ? (
+              <Link href="/profile">
+                <img
+                  className="w-[30px] h-[30px]"
+                  src="/login.png"
+                  alt="login"
+                />
+              </Link>
+            ) : (
+              <Link href="/login">
+                <img
+                  className="w-[30px] h-[30px]"
+                  src="/login.png"
+                  alt="login"
+                />
+              </Link>
+            ))}
+
           <img
             className="icon mt-[5px]"
             src="/search-icon.svg"
